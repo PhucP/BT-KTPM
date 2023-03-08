@@ -25,13 +25,7 @@ class Cart(models.Model):
     status = models.CharField(max_length=4, choices=CART_STATUS_CHOICES, default='WAIT')
     products = models.ManyToManyField(Product, through='CartProduct')
 
-    class Meta:
-        db_table = 'cart'
-
 class CartProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     quantity = models.IntegerField()
-
-    class Meta:
-        ordering = ['cart']

@@ -1,13 +1,48 @@
+<!-- 
+Online HTML, CSS and JavaScript editor to run code online.
+-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>Test</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{% static 'style.css' %}" />
+  <title>Browser</title>
 </head>
-
 <body>
-    <h2>A list of products</h2>
+  <header>
+    <h2> E-commerce Store (ES) </h2>
+  </header>
+  <nav>
+    <a href="#"><span>Link 1</span></a>
+    <a href="#"><span>Link 2</span></a>
+  </nav>
 
-    <ul>
-        {% for x in products %}
-            <li>{{ x.name }} {{ x.price }}</li>
-        {% endfor %}
-    </ul>
+  <div class="main-content">
+    <h3>List of available products to buy</h3>
+      {% for p in products %}
+    <section class="card">
+        <div class="image-sec">
+            <img src="{% static 'capacitor.jpg' %}" alt="{{ p.image }}">
+        </div>
+
+        <div class="text-sec">
+            <h2>{{ p.name }} </h2>
+            <p> Categories:
+                {% for c in p.categories %}
+                <span>{{ c|safe }},</span>
+                {% endfor %}
+            </p>
+            <h3><i>Price: {{ p.price }}</i></h3>
+            <p class="desc">{{ p.description }}</p>
+            <label for = "numinput">Quantity:</label>
+            <input type="number" min="1" max="10" step="1" class="numinput"> <button>Add to cart</button>
+        </div>
+    </section>
+      {% endfor %}
+  </div>
 </body>
+
+</html>
